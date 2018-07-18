@@ -5,6 +5,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+import VueChatScroll from 'vue-chat-scroll'
+
 require('./bootstrap');
 
 window.Vue = require('vue');
@@ -18,14 +20,37 @@ window.Vue = require('vue');
  * 
  */
 
-
 Vue.component('chat-messages', require('./components/ChatMessages.vue'));
 Vue.component('chat-form', require('./components/ChatForm.vue'));
+Vue.use(VueChatScroll)
 
 const app = new Vue({
     el: '#app',
+
     data: {
         messages: []
+    },
+
+    methods: {
+        fetchMessages() {
+            axios.get('/messages').then(response => {
+                this.messages = response.data;
+            });
+            this.scrollToEnd();
+        },
+
+        addMessage(message) {
+            this.messages.push(message);
+
+            axios.post('/messages', message).then(response => {
+                console.log(response.data);
+            });
+            this.scrollToEnd();
+        },
+
+        scrollToEnd(){
+            $('.card-body-message').animate({ scrollTop: $('.card-body-message').prop("scrollHeight")}, 1000);
+        }
     },
 
     created() {
@@ -35,22 +60,15 @@ const app = new Vue({
                 message: e.message.message,
                 user: e.user
             });
+
+            //this.scrollToEnd();
         });
     },
 
-    methods: {
-        fetchMessages() {
-            axios.get('/messages').then(response => {
-                this.messages = response.data;
-            });
-        },
+    updated (){
+        this.scrollToEnd();
+    },
 
-        addMessage(message) {
-            this.messages.push(message);
-
-            axios.post('/messages', message).then(response => {
-                console.log(response.data);
-            });
-        }
-    }
 });
+
+

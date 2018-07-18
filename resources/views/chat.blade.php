@@ -4,14 +4,16 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">聊天室</div>
-
-                    <div class="panel-body">
-                        <chat-messages :messages="messages"></chat-messages>
+            <div class="col">
+                <div class="card">
+                    <div class="card-heading bg-info text-white p-3">
+                        <h5> <strong>聊天室</strong></h5>
                     </div>
-                    <div class="panel-footer">
+
+                    <div class="card-body card-body-message" >
+                        <chat-messages class="scroll" :messages="messages"></chat-messages>
+                    </div>
+                    <div class="card-footer">
                         <chat-form
                                 v-on:messagesent="addMessage"
                                 :user="{{ Auth::user() }}"
