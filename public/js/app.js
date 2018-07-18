@@ -14030,6 +14030,7 @@ var app = new Vue({
                 user: e.user
             });
         });
+        this.scrollToEnd();
     },
 
 
