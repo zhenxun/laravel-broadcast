@@ -39,7 +39,7 @@ const app = new Vue({
                 user: e.user
             });
         });
-        
+        this.scrollToEnd();
     },
 
     methods: {
