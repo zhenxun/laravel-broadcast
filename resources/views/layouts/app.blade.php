@@ -74,7 +74,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer="defer"></script>
-    <script src="{{ asset('js/custome.js') }}" defer="defer"></script>
+    <script src="{{ asset('js/app.js?20180718') }}" defer="defer"></script>
+    <script src="{{ asset('js/custome.js?20180718') }}" defer="defer"></script>
 </body>
 </html>
