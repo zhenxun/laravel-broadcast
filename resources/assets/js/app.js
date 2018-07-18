@@ -42,6 +42,7 @@ const app = new Vue({
         fetchMessages() {
             axios.get('/messages').then(response => {
                 this.messages = response.data;
+                console.log(this.messages);
             });
         },
 
