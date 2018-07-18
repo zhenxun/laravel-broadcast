@@ -67,5 +67,9 @@ const app = new Vue({
 });
 
 $(document).ready(function(){
-    $('.card-body-message').scrollTop($('.card-body-message')[0].scrollHeight);
+
+    $('.card-body-message').ready(function(){
+        $('.card-body-message').scrollTop($('.card-body-message')[0].scrollHeight);
+    });
+    
 });
