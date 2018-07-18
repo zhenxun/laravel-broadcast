@@ -31,22 +31,10 @@ const app = new Vue({
         messages: []
     },
 
-    created() {
-        this.fetchMessages();
-        Echo.private('chat').listen('MessageSent', (e) => {
-            this.messages.push({
-                message: e.message.message,
-                user: e.user
-            });
-        });
-        this.scrollToEnd();
-    },
-
     methods: {
         fetchMessages() {
             axios.get('/messages').then(response => {
                 this.messages = response.data;
-                console.log(this.messages);
             });
             this.scrollToEnd();
         },
@@ -63,13 +51,24 @@ const app = new Vue({
         scrollToEnd(){
             $('.card-body-message').animate({ scrollTop: $('.card-body-message').prop("scrollHeight")}, 1000);
         }
-    }
+    },
+
+    created() {
+        this.fetchMessages();
+        Echo.private('chat').listen('MessageSent', (e) => {
+            this.messages.push({
+                message: e.message.message,
+                user: e.user
+            });
+
+            //this.scrollToEnd();
+        });
+    },
+
+    updated (){
+        this.scrollToEnd();
+    },
+
 });
 
-$(document).ready(function(){
 
-    $('.card-body-message').ready(function(){
-        $('.card-body-message').scrollTop($('.card-body-message')[0].scrollHeight);
-    });
-    
-});
