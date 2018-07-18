@@ -1,9 +1,10 @@
 <template>
     <div class="input-group">
-        <input id="btn-input" type="text" name="message" class="form-control input-sm" placeholder="在这里输入要发送的消息..." v-model="newMessage" @keyup.enter="sendMessage">
+
+        <input id="btn-input" type="text" name="message" class="form-control mr-1" placeholder="在这里输入要发送的消息..." v-model="newMessage" @keyup.enter="sendMessage">
 
         <span class="input-group-btn">
-            <button class="btn btn-primary btn-sm" id="btn-chat" @click="sendMessage">
+            <button class="btn btn-primary" id="btn-chat" @click="sendMessage">
                 发送
             </button>
         </span>

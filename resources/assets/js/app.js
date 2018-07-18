@@ -5,12 +5,11 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+import VueChatScroll from 'vue-chat-scroll'
+
 require('./bootstrap');
 
 window.Vue = require('vue');
-
-import VueChatScroll from 'vue-chat-scroll'
-window.Vue.use(VueChatScroll)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -21,9 +20,9 @@ window.Vue.use(VueChatScroll)
  * 
  */
 
-
 Vue.component('chat-messages', require('./components/ChatMessages.vue'));
 Vue.component('chat-form', require('./components/ChatForm.vue'));
+Vue.use(VueChatScroll)
 
 const app = new Vue({
     el: '#app',
@@ -40,6 +39,7 @@ const app = new Vue({
                 user: e.user
             });
         });
+        
     },
 
     methods: {
@@ -48,6 +48,7 @@ const app = new Vue({
                 this.messages = response.data;
                 console.log(this.messages);
             });
+            this.scrollToEnd();
         },
 
         addMessage(message) {
@@ -56,6 +57,15 @@ const app = new Vue({
             axios.post('/messages', message).then(response => {
                 console.log(response.data);
             });
+            this.scrollToEnd();
+        },
+
+        scrollToEnd(){
+            $('.card-body-message').animate({ scrollTop: $('.card-body-message').prop("scrollHeight")}, 1000);
         }
     }
+});
+
+$(document).ready(function(){
+    $('.card-body-message').scrollTop($('.card-body-message')[0].scrollHeight);
 });
