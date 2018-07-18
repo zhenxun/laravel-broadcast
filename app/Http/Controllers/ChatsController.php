@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Message;
-use Illuminate\Mail\Message;
 use App\Events\MessageSent;
 
 class ChatsController extends Controller
