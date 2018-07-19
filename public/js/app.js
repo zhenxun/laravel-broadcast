@@ -14044,7 +14044,7 @@ var app = new Vue({
             $('.card-body-message').animate({ scrollTop: $('.card-body-message').prop("scrollHeight") }, 1000);
         },
         playSound: function playSound() {
-            var audio = new Audio('/music/results.mp3');
+            var audio = new Audio('/music/to-the-point.mp3');
             audio.play();
         }
     },
@@ -14056,7 +14056,8 @@ var app = new Vue({
         Echo.private('chat').listen('MessageSent', function (e) {
             _this2.messages.push({
                 message: e.message.message,
-                user: e.user
+                user: e.user,
+                created_at: e.message.created_at
             });
         });
     },

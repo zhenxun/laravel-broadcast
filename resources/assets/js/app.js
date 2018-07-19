@@ -56,7 +56,7 @@ const app = new Vue({
         },
 
         playSound(){
-            var audio = new Audio('/music/results.mp3');
+            var audio = new Audio('/music/to-the-point.mp3');
             audio.play();
         }
     },
@@ -66,7 +66,8 @@ const app = new Vue({
         Echo.private('chat').listen('MessageSent', (e) => {
             this.messages.push({
                 message: e.message.message,
-                user: e.user
+                user: e.user,
+                created_at:e.message.created_at
             });
         });
     },
