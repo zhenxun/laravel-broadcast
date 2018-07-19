@@ -18,20 +18,26 @@ class ChatsController extends Controller
     }
 
     public function fetchMessages(){
-        return Message::with('user')->get();
+        return Message::with('user')->where('date', date('Y-m-d'))->get();
     }
 
     public function sendMessages(Request $request){
 
         $user = Auth::user();
 
-        $message = $user->messages()->create([
-            'message' => $request->input('message')
-        ]);
+        if(!empty($request->input('message')))
+        {
+            $message = $user->messages()->create([
+                'message' => $request->input('message'),
+                'date' => date('Y-m-d')
+            ]);
 
-        broadcast(new MessageSent($user, $message))->toOthers();
+            broadcast(new MessageSent($user, $message))->toOthers();
 
-        return ['status' => 'Message Send!'];
+            return ['status' => 'Message Send!'];
+        }else{
+            return ['status' => 'Message no send'];
+        }
 
     }
 }

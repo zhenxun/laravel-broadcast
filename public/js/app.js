@@ -14026,6 +14026,7 @@ var app = new Vue({
 
             axios.get('/messages').then(function (response) {
                 _this.messages = response.data;
+                console.log(response.data);
             });
             this.scrollToEnd();
         },
@@ -52594,6 +52595,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['messages']
@@ -52615,16 +52617,23 @@ var render = function() {
         _c("div", { staticClass: "chat-body clearfix" }, [
           _c("div", { staticClass: "header" }, [
             _c("strong", { staticClass: "primary-font" }, [
+              _c("img", {
+                staticClass: "img-thumbnail rounded-circle",
+                staticStyle: { width: "35px", height: "35px" },
+                attrs: { src: message.user.avatar }
+              }),
               _vm._v(
-                "\n                    " + _vm._s(message.user.name) + " "
+                "\n                    " +
+                  _vm._s(message.user.name) +
+                  "\n                    "
               ),
-              _c("br"),
-              _vm._v(" "),
-              _c("small", [_vm._v(_vm._s(message.user.created_at))])
+              _c("small", { staticClass: "ml-1" }, [
+                _vm._v(_vm._s(message.created_at))
+              ])
             ])
           ]),
           _vm._v(" "),
-          _c("p", { staticClass: "my-1 p-1 border border-info rounded" }, [
+          _c("p", { staticClass: "my-2 p-1 border border-info rounded" }, [
             _vm._v(
               "\n                " + _vm._s(message.message) + "\n            "
             )
