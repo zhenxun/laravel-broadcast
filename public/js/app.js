@@ -14026,11 +14026,14 @@ var app = new Vue({
 
             axios.get('/messages').then(function (response) {
                 _this.messages = response.data;
+                console.log(response.data);
             });
             this.scrollToEnd();
         },
         addMessage: function addMessage(message) {
             this.messages.push(message);
+
+            console.log(message);
 
             axios.post('/messages', message).then(function (response) {
                 console.log(response.data);
@@ -14039,6 +14042,10 @@ var app = new Vue({
         },
         scrollToEnd: function scrollToEnd() {
             $('.card-body-message').animate({ scrollTop: $('.card-body-message').prop("scrollHeight") }, 1000);
+        },
+        playSound: function playSound() {
+            var audio = new Audio('/music/to-the-point.mp3');
+            audio.play();
         }
     },
 
@@ -14049,14 +14056,14 @@ var app = new Vue({
         Echo.private('chat').listen('MessageSent', function (e) {
             _this2.messages.push({
                 message: e.message.message,
-                user: e.user
+                user: e.user,
+                created_at: e.message.created_at
             });
-
-            //this.scrollToEnd();
         });
     },
     updated: function updated() {
         this.scrollToEnd();
+        this.playSound();
     }
 });
 
@@ -52594,6 +52601,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['messages']
@@ -52615,16 +52624,29 @@ var render = function() {
         _c("div", { staticClass: "chat-body clearfix" }, [
           _c("div", { staticClass: "header" }, [
             _c("strong", { staticClass: "primary-font" }, [
+              message.user.avatar != ""
+                ? _c("img", {
+                    staticClass: "img-thumbnail rounded-circle",
+                    staticStyle: { width: "35px", height: "35px" },
+                    attrs: { src: message.user.avatar }
+                  })
+                : _c("img", {
+                    staticClass: "img-thumbnail rounded-circle",
+                    staticStyle: { width: "35px", height: "35px" },
+                    attrs: { src: "http://placehold.it/35x35" }
+                  }),
               _vm._v(
-                "\n                    " + _vm._s(message.user.name) + " "
+                "\n                    " +
+                  _vm._s(message.user.name) +
+                  "\n                    "
               ),
-              _c("br"),
-              _vm._v(" "),
-              _c("small", [_vm._v(_vm._s(message.user.created_at))])
+              _c("small", { staticClass: "ml-1" }, [
+                _vm._v(_vm._s(message.created_at))
+              ])
             ])
           ]),
           _vm._v(" "),
-          _c("p", { staticClass: "my-1 p-1 border border-info rounded" }, [
+          _c("p", { staticClass: "my-2 p-1 border border-info rounded" }, [
             _vm._v(
               "\n                " + _vm._s(message.message) + "\n            "
             )
@@ -52709,10 +52731,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['user'],
+    props: ['user', 'created_at'],
 
     data: function data() {
         return {
@@ -52725,7 +52746,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         sendMessage: function sendMessage() {
             this.$emit('messagesent', {
                 user: this.user,
-                message: this.newMessage
+                message: this.newMessage,
+                created_at: this.created_at
             });
 
             this.newMessage = '';

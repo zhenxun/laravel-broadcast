@@ -35,13 +35,14 @@ const app = new Vue({
         fetchMessages() {
             axios.get('/messages').then(response => {
                 this.messages = response.data;
+                console.log(response.data);
             });
             this.scrollToEnd();
         },
 
         addMessage(message) {
             this.messages.push(message);
-
+            
             axios.post('/messages', message).then(response => {
                 console.log(response.data);
             });
@@ -50,6 +51,11 @@ const app = new Vue({
 
         scrollToEnd(){
             $('.card-body-message').animate({ scrollTop: $('.card-body-message').prop("scrollHeight")}, 1000);
+        },
+
+        playSound(){
+            var audio = new Audio('/music/to-the-point.mp3');
+            audio.play();
         }
     },
 
@@ -58,15 +64,15 @@ const app = new Vue({
         Echo.private('chat').listen('MessageSent', (e) => {
             this.messages.push({
                 message: e.message.message,
-                user: e.user
+                user: e.user,
+                created_at:e.message.created_at
             });
-
-            //this.scrollToEnd();
         });
     },
 
     updated (){
         this.scrollToEnd();
+        this.playSound();
     },
 
 });

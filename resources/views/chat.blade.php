@@ -17,6 +17,7 @@
                         <chat-form
                                 v-on:messagesent="addMessage"
                                 :user="{{ Auth::user() }}"
+                                created_at="{{ $date }}"
                         ></chat-form>
                     </div>
                 </div>

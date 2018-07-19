@@ -1,6 +1,5 @@
 <template>
     <div class="input-group">
-
         <input id="btn-input" type="text" name="message" class="form-control mr-1" placeholder="在这里输入要发送的消息..." v-model="newMessage" @keyup.enter="sendMessage">
 
         <span class="input-group-btn">
@@ -13,7 +12,7 @@
 
 <script>
     export default {
-        props: ['user'],
+        props: ['user', 'created_at'],
 
         data() {
             return {
@@ -25,7 +24,8 @@
             sendMessage() {
                 this.$emit('messagesent', {
                     user: this.user,
-                    message: this.newMessage
+                    message: this.newMessage,
+                    created_at: this.created_at
                 });
 
                 this.newMessage = ''
