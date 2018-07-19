@@ -26,7 +26,7 @@
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            <img src="{{ Auth::user()->getMedia('avatars')->last()->getUrl('thumb') }}" class="img-thumbnail rounded-circle" style="width:40px;height:40px;">
+                            <img src="{{ Auth::user()->getMedia('avatars')->last()->getUrl('thumb') or 'http://placehold.it/40x40' }}" class="img-thumbnail rounded-circle" style="width:40px;height:40px;">
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
