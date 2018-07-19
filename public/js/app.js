@@ -52596,6 +52596,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['messages']
@@ -52617,11 +52618,17 @@ var render = function() {
         _c("div", { staticClass: "chat-body clearfix" }, [
           _c("div", { staticClass: "header" }, [
             _c("strong", { staticClass: "primary-font" }, [
-              _c("img", {
-                staticClass: "img-thumbnail rounded-circle",
-                staticStyle: { width: "35px", height: "35px" },
-                attrs: { src: message.user.avatar }
-              }),
+              message.user.avatar != ""
+                ? _c("img", {
+                    staticClass: "img-thumbnail rounded-circle",
+                    staticStyle: { width: "35px", height: "35px" },
+                    attrs: { src: message.user.avatar }
+                  })
+                : _c("img", {
+                    staticClass: "img-thumbnail rounded-circle",
+                    staticStyle: { width: "35px", height: "35px" },
+                    attrs: { src: "http://placehold.it/35x35" }
+                  }),
               _vm._v(
                 "\n                    " +
                   _vm._s(message.user.name) +

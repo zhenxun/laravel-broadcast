@@ -4,7 +4,8 @@
             <div class="chat-body clearfix">
                 <div class="header">
                     <strong class="primary-font">
-                        <img :src="message.user.avatar" class="img-thumbnail rounded-circle" style="width:35px;height:35px;">
+                        <img v-if="message.user.avatar != ''" :src="message.user.avatar" class="img-thumbnail rounded-circle" style="width:35px;height:35px;">
+                        <img v-else :src="'http://placehold.it/35x35'" class="img-thumbnail rounded-circle" style="width:35px;height:35px;">
                         {{ message.user.name }}
                         <small class="ml-1">{{ message.created_at }}</small>
                     </strong>
