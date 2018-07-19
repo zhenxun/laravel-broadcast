@@ -14033,6 +14033,8 @@ var app = new Vue({
         addMessage: function addMessage(message) {
             this.messages.push(message);
 
+            console.log(message);
+
             axios.post('/messages', message).then(function (response) {
                 console.log(response.data);
             });
@@ -14042,7 +14044,7 @@ var app = new Vue({
             $('.card-body-message').animate({ scrollTop: $('.card-body-message').prop("scrollHeight") }, 1000);
         },
         playSound: function playSound() {
-            var audio = new Audio('/music/Ringing-a-doorbell.mp3');
+            var audio = new Audio('/music/results.mp3');
             audio.play();
         }
     },
@@ -52728,10 +52730,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['user'],
+    props: ['user', 'created_at'],
 
     data: function data() {
         return {
@@ -52744,7 +52745,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         sendMessage: function sendMessage() {
             this.$emit('messagesent', {
                 user: this.user,
-                message: this.newMessage
+                message: this.newMessage,
+                created_at: this.created_at
             });
 
             this.newMessage = '';

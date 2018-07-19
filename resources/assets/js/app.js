@@ -43,6 +43,8 @@ const app = new Vue({
         addMessage(message) {
             this.messages.push(message);
 
+            console.log(message);
+
             axios.post('/messages', message).then(response => {
                 console.log(response.data);
             });
@@ -54,7 +56,7 @@ const app = new Vue({
         },
 
         playSound(){
-            var audio = new Audio('/music/Ringing-a-doorbell.mp3');
+            var audio = new Audio('/music/results.mp3');
             audio.play();
         }
     },
