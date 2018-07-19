@@ -26,7 +26,12 @@
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            <img src="{{ Auth::user()->getMedia('avatars')->last()->getUrl('thumb') or 'http://placehold.it/40x40' }}" class="img-thumbnail rounded-circle" style="width:40px;height:40px;">
+                            @if(!empty(Auth::user()->getMedia('avatars')->last()->getUrl('thumb'))
+                            <img src="{{  Auth::user()->getMedia('avatars')->last()->getUrl('thumb') }}" class="img-thumbnail rounded-circle" style="width:40px;height:40px;">
+                            @else
+                            <img src="http://placehold.it/40x40" class="img-thumbnail rounded-circle" style="width:40px;height:40px;">
+                            @endif
+                            
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
