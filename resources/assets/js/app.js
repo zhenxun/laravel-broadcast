@@ -51,6 +51,11 @@ const app = new Vue({
 
         scrollToEnd(){
             $('.card-body-message').animate({ scrollTop: $('.card-body-message').prop("scrollHeight")}, 1000);
+        },
+
+        playSound(){
+            var audio = new Audio('/music/Ringing-a-doorbell.mp3');
+            audio.play();
         }
     },
 
@@ -61,13 +66,12 @@ const app = new Vue({
                 message: e.message.message,
                 user: e.user
             });
-
-            //this.scrollToEnd();
         });
     },
 
     updated (){
         this.scrollToEnd();
+        this.playSound();
     },
 
 });

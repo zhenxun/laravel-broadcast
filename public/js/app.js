@@ -14040,6 +14040,10 @@ var app = new Vue({
         },
         scrollToEnd: function scrollToEnd() {
             $('.card-body-message').animate({ scrollTop: $('.card-body-message').prop("scrollHeight") }, 1000);
+        },
+        playSound: function playSound() {
+            var audio = new Audio('/music/Ringing-a-doorbell.mp3');
+            audio.play();
         }
     },
 
@@ -14052,12 +14056,11 @@ var app = new Vue({
                 message: e.message.message,
                 user: e.user
             });
-
-            //this.scrollToEnd();
         });
     },
     updated: function updated() {
         this.scrollToEnd();
+        this.playSound();
     }
 });
 
