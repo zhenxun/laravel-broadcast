@@ -52602,9 +52602,54 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['messages']
+    props: ['messages', 'user']
 });
 
 /***/ }),
@@ -52616,41 +52661,85 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "ul",
-    { staticClass: "chat" },
+    "div",
+    { staticClass: "col-12 border bg-light rounded" },
     _vm._l(_vm.messages, function(message) {
-      return _c("li", { staticClass: "left clearfix" }, [
-        _c("div", { staticClass: "chat-body clearfix" }, [
-          _c("div", { staticClass: "header" }, [
-            _c("strong", { staticClass: "primary-font" }, [
-              message.user.avatar != ""
-                ? _c("img", {
-                    staticClass: "img-thumbnail rounded-circle",
-                    staticStyle: { width: "35px", height: "35px" },
-                    attrs: { src: message.user.avatar }
-                  })
-                : _c("img", {
-                    staticClass: "img-thumbnail rounded-circle",
-                    staticStyle: { width: "35px", height: "35px" },
-                    attrs: { src: "http://placehold.it/35x35" }
-                  }),
-              _vm._v(
-                "\n                    " +
-                  _vm._s(message.user.name) +
-                  "\n                    "
-              ),
-              _c("small", { staticClass: "ml-1" }, [
-                _vm._v(_vm._s(message.created_at))
+      return _c("div", { staticClass: "d-flex flex-column" }, [
+        message.first === true
+          ? _c("div", { staticClass: "d-flex flex-column" }, [
+              _c("div", { staticClass: "d-flex align-items-center" }, [
+                _c("div", { staticClass: "py-2" }, [
+                  message.user.avatar !== ""
+                    ? _c("img", {
+                        staticClass: "img-thumbnail rounded-circle",
+                        staticStyle: { width: "35px", height: "35px" },
+                        attrs: { src: message.user.avatar }
+                      })
+                    : _c("img", {
+                        staticClass: "img-thumbnail rounded-circle",
+                        staticStyle: { width: "35px", height: "35px" },
+                        attrs: { src: "http://placehold.it/35x35" }
+                      })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "px-3 py-3" }, [
+                  _c("p", { staticClass: "box u-l-tri mb-0 text-white" }, [
+                    _vm._v(_vm._s(message.message))
+                  ])
+                ])
               ])
             ])
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "my-2 p-1 border border-info rounded" }, [
-            _vm._v(
-              "\n                " + _vm._s(message.message) + "\n            "
-            )
-          ])
-        ])
+          : parseInt(_vm.user.id) === parseInt(message.user_id)
+            ? _c("div", { staticClass: "d-flex flex-column" }, [
+                _c("div", { staticClass: "d-flex align-items-center" }, [
+                  _c("div", { staticClass: "py-2" }, [
+                    message.user.avatar !== ""
+                      ? _c("img", {
+                          staticClass: "img-thumbnail rounded-circle",
+                          staticStyle: { width: "35px", height: "35px" },
+                          attrs: { src: message.user.avatar }
+                        })
+                      : _c("img", {
+                          staticClass: "img-thumbnail rounded-circle",
+                          staticStyle: { width: "35px", height: "35px" },
+                          attrs: { src: "http://placehold.it/35x35" }
+                        })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "px-3 py-3" }, [
+                    _c("p", { staticClass: "box u-l-tri mb-0 text-white" }, [
+                      _vm._v(_vm._s(message.message))
+                    ])
+                  ])
+                ])
+              ])
+            : _c(
+                "div",
+                { staticClass: "d-flex flex-column flex-row-reverse" },
+                [
+                  _c("div", { staticClass: "d-flex align-items-center" }, [
+                    _c("div", { staticClass: "px-3 py-3" }, [
+                      _c("p", { staticClass: "box u-r-tri mb-0 text-white" }, [
+                        _vm._v(_vm._s(message.message))
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "py-2" }, [
+                      message.user.avatar !== ""
+                        ? _c("img", {
+                            staticClass: "img-thumbnail rounded-circle",
+                            staticStyle: { width: "35px", height: "35px" },
+                            attrs: { src: message.user.avatar }
+                          })
+                        : _c("img", {
+                            staticClass: "img-thumbnail rounded-circle",
+                            staticStyle: { width: "35px", height: "35px" },
+                            attrs: { src: "http://placehold.it/35x35" }
+                          })
+                    ])
+                  ])
+                ]
+              )
       ])
     })
   )
@@ -52732,7 +52821,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['user', 'created_at'],
+    props: ['user', 'created_at', 'first'],
 
     data: function data() {
         return {
@@ -52754,7 +52843,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$emit('messagesent', {
                 user: this.user,
                 message: this.newMessage,
-                created_at: nddate
+                created_at: nddate,
+                first: this.first
             });
 
             this.newMessage = '';

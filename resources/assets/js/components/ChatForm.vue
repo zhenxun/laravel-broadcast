@@ -12,7 +12,7 @@
 
 <script>
     export default {
-        props: ['user', 'created_at'],
+        props: ['user', 'created_at', 'first'],
 
         data() {
             return {
@@ -33,7 +33,8 @@
                 this.$emit('messagesent', {
                     user: this.user,
                     message: this.newMessage,
-                    created_at: nddate
+                    created_at: nddate,
+                    first: this.first
                 });
 
                 this.newMessage = ''
