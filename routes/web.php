@@ -18,3 +18,4 @@ Route::get('messages', 'ChatsController@fetchMessages');
 Route::post('messages', 'ChatsController@sendMessages');
 
 Route::resource('profile', 'ProfileController', ['only' => ['edit', 'update']]);
+Route::resource('history', 'HistoryController', ['only' => ['index', 'show']]);
