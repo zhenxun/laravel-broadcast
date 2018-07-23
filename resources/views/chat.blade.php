@@ -11,13 +11,14 @@
                     </div>
 
                     <div class="card-body card-body-message" >
-                        <chat-messages class="scroll" :messages="messages"></chat-messages>
+                        <chat-messages class="scroll" :messages="messages" :user="{{ Auth::user() }}"></chat-messages>
                     </div>
                     <div class="card-footer">
                         <chat-form
                                 v-on:messagesent="addMessage"
                                 :user="{{ Auth::user() }}"
-                                created_at="{{ $date }}"
+                                created_at=""
+                                :first="true"
                         ></chat-form>
                     </div>
                 </div>

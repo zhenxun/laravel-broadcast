@@ -14,7 +14,7 @@ class ChatsController extends Controller
     }
 
     public function index(){
-        $date = date('Y-m-d H:i:s');
+        $date = date('Y-m-d H:i:s', time());
         return view('chat', compact('date'));
     }
 

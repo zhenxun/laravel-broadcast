@@ -12,7 +12,7 @@
 
 <script>
     export default {
-        props: ['user', 'created_at'],
+        props: ['user', 'created_at', 'first'],
 
         data() {
             return {
@@ -22,10 +22,19 @@
 
         methods: {
             sendMessage() {
+                //實體化時間物件
+                var dNow = new Date();
+                //計算出utc時間
+                var utc = dNow.getTime() + (dNow.getTimezoneOffset() * 60000);
+                //utc+8
+                var nd = new Date(utc + (3600000*8));
+                var nddate= nd.getFullYear() + '-' + (nd.getMonth()+1) + '-' + nd.getDate() + ' ' + nd.getHours() + ':' + nd.getMinutes() + ":" + nd.getSeconds();
+
                 this.$emit('messagesent', {
                     user: this.user,
                     message: this.newMessage,
-                    created_at: this.created_at
+                    created_at: nddate,
+                    first: this.first
                 });
 
                 this.newMessage = ''
