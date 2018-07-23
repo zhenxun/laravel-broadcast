@@ -46,6 +46,7 @@ const app = new Vue({
             axios.post('/messages', message).then(response => {
                 console.log(response.data);
             });
+
             this.scrollToEnd();
         },
 
